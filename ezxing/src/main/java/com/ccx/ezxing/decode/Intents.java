@@ -221,7 +221,7 @@ public final class Intents {
 
     /**
      * The type of data being supplied if the format is QR Code. Use
-     * {@link Intent#putExtra(String, String)} with one of {@link Contents.Type}.
+     * {@link Intent#putExtra(String, String)} with one of .
      */
     public static final String TYPE = "ENCODE_TYPE";
 
