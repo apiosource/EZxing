@@ -11,6 +11,23 @@
     2. 生成二维码的工具类。ZxingUtils
 
 
+#### 如何使用
+
+在工程的gradle下
+
+        implementation 'com.ccx1:EZxing:1.0.1'
+
+在project的gradle中的allprojects中加入
+
+        allprojects {
+            repositories {
+                google()
+                jcenter()
+                maven {url 'https://dl.bintray.com/ci250454344/EZxing'}
+            }
+        }
+
+
 使用方法，直接进行findviewbyid可以直接开始扫描，需要照相机权限，比较懒，就没写这个权限了。
 
 写了一个ParsingCompleteListener 监听器

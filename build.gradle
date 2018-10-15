@@ -19,6 +19,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven {url 'https://dl.bintray.com/ci250454344/EZxing'}
     }
     tasks.withType(Javadoc) {
         options{ encoding "UTF-8"
