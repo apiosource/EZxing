@@ -15,7 +15,7 @@
 
 在工程的gradle下
 
-        implementation 'com.ccx1:EZxing:1.0.2'
+        implementation 'com.ccx1:EZxing:1.0.3'
 
 在project的gradle中的allprojects中加入
 

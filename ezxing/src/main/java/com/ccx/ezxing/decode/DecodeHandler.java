@@ -19,7 +19,6 @@ package com.ccx.ezxing.decode;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.support.annotation.Nullable;
 
 import com.ccx.ezxing.camera.CameraManager;
 import com.ccx.ezxing.conts.Conts;
@@ -76,8 +75,9 @@ final class DecodeHandler extends Handler {
         //竖屏
         byte[] rotatedData = new byte[data.length];
         for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++)
+            for (int x = 0; x < width; x++){
                 rotatedData[x * height + height - y - 1] = data[x + y * width];
+            }
         }
         int tmp = width;
         width = height;
@@ -114,7 +114,6 @@ final class DecodeHandler extends Handler {
         }
     }
 
-    @Nullable
     private Result getResult(byte[] data, int width, int height) {
         Result                   rawResult = null;
         PlanarYUVLuminanceSource source    = cameraManager.buildLuminanceSource(data, width, height);

@@ -28,10 +28,6 @@ android {
 dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation files('libs/core-3.3.3.jar')
 }
 
@@ -41,7 +37,7 @@ publish {
     userOrg = 'ci250454344'           //bintray注册的用户名
     groupId = 'com.ccx1'            //compile引用时的第1部分groupId
     artifactId = 'EZxing'       //compile引用时的第2部分项目名
-    publishVersion = '1.0.2'       //compile引用时的第3部分版本号
+    publishVersion = '1.0.3'       //compile引用时的第3部分版本号
     desc = 'This is a zxing library for Android'
     website = 'https://github.com/ccx1/EZxing'
 }
