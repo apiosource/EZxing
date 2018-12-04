@@ -3,6 +3,7 @@ package com.ccx.ezxing.view;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Shader;
 import android.hardware.Camera;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -29,26 +30,26 @@ import java.util.Vector;
 
 public class ScannerView extends FrameLayout {
 
-    private Context                 mContext;
-    private ViewfinderView          mViewfinderView;
-    private CameraManager           cameraManager;
-    private boolean                 hasSurface;
-    private ResultHandler           handler;
-    private ParsingCompleteListener parsingCompleteListener;
-    private SurfaceView             mSurfaceView;
-    private boolean Product    = true;
-    private boolean Industrial = true;
-    private boolean QrCode     = true;
-    private boolean DataMatrix = true;
-    private boolean Aztec;
-    private boolean Pdf417;
-    public static final int CAMERA_FACING_BACK = 0;
+    private             Context                 mContext;
+    private             ViewfinderView          mViewfinderView;
+    private             CameraManager           cameraManager;
+    private             boolean                 hasSurface;
+    private             ResultHandler           handler;
+    private             ParsingCompleteListener parsingCompleteListener;
+    private             SurfaceView             mSurfaceView;
+    private             boolean                 Product            = true;
+    private             boolean                 Industrial         = true;
+    private             boolean                 QrCode             = true;
+    private             boolean                 DataMatrix         = true;
+    private             boolean                 Aztec;
+    private             boolean                 Pdf417;
+    public static final int                     CAMERA_FACING_BACK = 0;
 
     /**
      * The facing of the camera is the same as that of the screen.
      */
-    public static final int CAMERA_FACING_FRONT = 1;
-    private boolean mOpenFront;
+    public static final int     CAMERA_FACING_FRONT = 1;
+    private             boolean mOpenFront;
 
 
     public ScannerView(Context context) {
@@ -100,6 +101,30 @@ public class ScannerView extends FrameLayout {
         this.addView(mViewfinderView);
     }
 
+    public void setScanWidthAndHeight(int tailor) {
+        mViewfinderView.setScanWidthAndHeight(tailor);
+    }
+
+    public void setScannerViewColor(int color) {
+        mViewfinderView.setScannerViewColor(color);
+    }
+
+    public void setScannerViewStrokeWidth(float size) {
+        mViewfinderView.setScannerViewStrokeWidth(size);
+//        invalidate();
+    }
+
+    public void setShader(Shader shader) {
+        mViewfinderView.setShader(shader);
+    }
+
+    public void setAnimationDelay(long animationDelay) {
+        mViewfinderView.setAnimationDelay(animationDelay);
+    }
+
+    public void setLineRollingDist(int dist) {
+        mViewfinderView.setLineRollingDist(dist);
+    }
 
     public void openFlash(boolean isOpen) {
         OpenCamera        camera      = cameraManager.getCamera();

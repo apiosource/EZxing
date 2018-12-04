@@ -111,6 +111,32 @@ max是我传的二维码图，你们想传文件也好，什么都可以，Bitma
 
         mScannerView.openFlash(isOpen);
 
+#### 新增方法
+
+1. 设置扫描框线条粗细
+
+        mScannerView.setScannerViewStrokeWidth(5);
+
+2. 设置扫描框大小
+
+        mScannerView.setScanWidthAndHeight(80);
+
+3. 设置扫描框颜色
+
+        mScannerView.setScannerViewColor(Color.RED);
+
+4. 设置扫描框中间线条的波动时间
+
+        mScannerView.setAnimationDelay(20);
+
+5. 设置扫描框中心线条到底部的距离。
+
+        mScannerView.setLineRollingDist(30);
+
+6. 设置扫描框中心线条的样式
+
+        mScannerView.setShader(shader);
+
 
 新增自定义属性 ，是否打开前置摄像头。没写代码切换
 

@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn3:
                 intent.putExtra("fragmentType", "select");
                 break;
+            default:
+                break;
         }
         startActivity(intent);
     }

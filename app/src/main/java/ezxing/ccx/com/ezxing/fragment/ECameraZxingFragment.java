@@ -1,5 +1,6 @@
 package ezxing.ccx.com.ezxing.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -21,7 +22,7 @@ public class ECameraZxingFragment extends Fragment {
 
     private FragmentActivity mActivity;
     private ScannerView      mScannerView;
-    private boolean isOpen = false;
+    private boolean          isOpen = false;
 
     @Nullable
     @Override
@@ -29,6 +30,7 @@ public class ECameraZxingFragment extends Fragment {
         mActivity = getActivity();
         View view = inflater.inflate(R.layout.fragment_camera_zxing, container, false);
         mScannerView = view.findViewById(R.id.findview);
+
         mScannerView.setOnParsingCompleteListener(new ParsingCompleteListener() {
 
             @Override
@@ -44,6 +46,8 @@ public class ECameraZxingFragment extends Fragment {
                     case NUMBER:
                         break;
                     case URL:
+                        break;
+                    default:
                         break;
                 }
             }

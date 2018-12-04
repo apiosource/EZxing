@@ -23,24 +23,27 @@ import java.util.List;
 
 public final class ViewfinderView extends View {
 
-    private static final long ANIMATION_DELAY   = 20L;
+    private              long animationDelay    = 20L;
     private static final int  MAX_RESULT_POINTS = 20;
     private static final int  POINT_SIZE        = 6;
+    private static       int  ScannerColor      = Color.WHITE;
 
     private       CameraManager     cameraManager;
     private final Paint             paint;
     private       Bitmap            resultBitmap;
     private final int               maskColor;
     private final int               resultColor;
-    //    private final int               laserColor;
     private       List<ResultPoint> possibleResultPoints;
     private       boolean           isDraw;
-    private int mBottom = -1;
-    private int mTop    = -1;
-    private Shader mShader;
-    private Rect   mRect;
+    private       int               mBottom      = -1;
+    private       int               mTop         = -1;
+    private       Shader            mShader;
+    private       Rect              mRect;
+    private       int               mTailor;
+    private       float             mScannerSize = 10f;
+    private       Shader            mCustomShader;
+    private int dist = 100;
 
-    // This constructor is used when the class is built from an XML resource.
     public ViewfinderView(Context context, AttributeSet attrs) {
         super(context, attrs);
         // Initialize these once for performance rather than calling them every time in onDraw().
@@ -48,7 +51,6 @@ public final class ViewfinderView extends View {
         Resources resources = getResources();
         maskColor = resources.getColor(R.color.viewfinder_mask);
         resultColor = resources.getColor(R.color.result_view);
-//        laserColor = resources.getColor(R.color.viewfinder_laser);
         possibleResultPoints = new ArrayList<>(5);
 
     }
@@ -79,7 +81,12 @@ public final class ViewfinderView extends View {
         int YCenter = height / 2;
 
 //        如果要一个方形，那么需要取到两个的方形点
-        int tailor = XCenter / 4 * 3;
+        int tailor;
+        if (mTailor == -1) {
+            tailor = XCenter / 4 * 3;
+        } else {
+            tailor = mTailor;
+        }
         // 存放框的高度宽度信息
         Rect frame = new Rect(XCenter - tailor, YCenter - tailor, XCenter + tailor, YCenter + tailor);
 //        Rect frame = new Rect();
@@ -91,9 +98,9 @@ public final class ViewfinderView extends View {
         canvas.drawRect(frame.right + 1, frame.top, width, frame.bottom + 1, paint);
         canvas.drawRect(0, frame.bottom + 1, width, height, paint);
 
-        paint.setColor(Color.WHITE);
+        paint.setColor(ScannerColor);
 
-        paint.setStrokeWidth(10f);
+        paint.setStrokeWidth(mScannerSize);
         Path path = new Path();
         paint.setStyle(Paint.Style.STROKE);
         int left   = frame.left;
@@ -129,9 +136,9 @@ public final class ViewfinderView extends View {
 
         canvas.drawPath(path, paint);
 
-        if (mTop > frame.bottom - 100) {
+        if (mTop > frame.bottom - dist) {
             isDraw = true;
-        } else if (mTop < frame.top + 100) {
+        } else if (mTop < frame.top + dist) {
             isDraw = false;
         }
 
@@ -139,23 +146,27 @@ public final class ViewfinderView extends View {
             mTop = top + 5;
             mBottom = mTop + 5;
         }
-
+        int i = dist / 10;
         if (isDraw) {
-            mTop -= 10;
-            mBottom -= 10;
+            mTop -= i;
+            mBottom -= i;
         } else {
-            mTop += 10;
-            mBottom += 10;
+            mTop += i;
+            mBottom += i;
         }
 
         // 画中间的动画线
         paint.setStyle(Paint.Style.FILL);
-        mShader = new LinearGradient(frame.left, mTop, frame.right, mBottom, new int[]{Color.TRANSPARENT, Color.parseColor("#aaffffff"), Color.parseColor("#5526A69A"), Color.parseColor("#aaffffff"), Color.TRANSPARENT}, new float[]{0.1f, 0.2f, 0.5f, 0.8f, 1f}, LinearGradient.TileMode.CLAMP);
+        if (mCustomShader != null) {
+            mShader = mCustomShader;
+        } else {
+            mShader = new LinearGradient(frame.left, mTop, frame.right, mBottom, new int[]{Color.TRANSPARENT, Color.parseColor("#aaffffff"), Color.parseColor("#5526A69A"), Color.parseColor("#aaffffff"), Color.TRANSPARENT}, new float[]{0.1f, 0.2f, 0.5f, 0.8f, 1f}, LinearGradient.TileMode.CLAMP);
+        }
         paint.setShader(mShader);
 //        paint.setAlpha(100);
         canvas.drawRect(left, mTop, frame.right, mBottom, paint);
         paint.setShader(null);
-        postInvalidateDelayed(ANIMATION_DELAY,
+        postInvalidateDelayed(animationDelay,
                 frame.left - POINT_SIZE,
                 frame.top - POINT_SIZE,
                 frame.right + POINT_SIZE,
@@ -181,6 +192,32 @@ public final class ViewfinderView extends View {
     public void drawResultBitmap(Bitmap barcode) {
         resultBitmap = barcode;
         invalidate();
+    }
+
+    public void setScanWidthAndHeight(int tailor) {
+        mTailor = tailor;
+    }
+
+    public void setScannerViewColor(int color) {
+        ScannerColor = color;
+//        invalidate();
+    }
+
+    public void setScannerViewStrokeWidth(float size) {
+        mScannerSize = size;
+//        invalidate();
+    }
+
+    public void setShader(Shader shader) {
+        mCustomShader = shader;
+    }
+
+    public void setAnimationDelay(long animationDelay) {
+        this.animationDelay = animationDelay;
+    }
+
+    public void setLineRollingDist(int dist){
+        this.dist = dist;
     }
 
     public void addPossibleResultPoint(ResultPoint point) {
