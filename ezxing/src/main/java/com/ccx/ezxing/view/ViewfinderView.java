@@ -39,10 +39,10 @@ public final class ViewfinderView extends View {
     private       int               mTop         = -1;
     private       Shader            mShader;
     private       Rect              mRect;
-    private       int               mTailor;
+    private       int               mTailor      = -1;
     private       float             mScannerSize = 10f;
     private       Shader            mCustomShader;
-    private int dist = 100;
+    private       int               dist         = 100;
 
     public ViewfinderView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -216,7 +216,7 @@ public final class ViewfinderView extends View {
         this.animationDelay = animationDelay;
     }
 
-    public void setLineRollingDist(int dist){
+    public void setLineRollingDist(int dist) {
         this.dist = dist;
     }
 
