@@ -26,6 +26,7 @@ import android.view.SurfaceHolder;
 
 import com.ccx.ezxing.camera.open.OpenCamera;
 import com.ccx.ezxing.camera.open.OpenCameraInterface;
+import com.ccx.ezxing.decode.PlanarYUVLuminanceSourceTest;
 import com.google.zxing.PlanarYUVLuminanceSource;
 
 import java.io.IOException;
@@ -42,11 +43,11 @@ public final class CameraManager {
 
     private static final String TAG = CameraManager.class.getSimpleName();
 
-    private static final int MIN_FRAME_WIDTH  = 240;
-    private static final int MIN_FRAME_HEIGHT = 240;
-    private static final int MAX_FRAME_WIDTH  = 1200; // = 5/8 * 1920
-    private static final int MAX_FRAME_HEIGHT = 675; // = 5/8 * 1080
-    private static CameraManager mCameraManager;
+    private static final int           MIN_FRAME_WIDTH  = 240;
+    private static final int           MIN_FRAME_HEIGHT = 240;
+    private static final int           MAX_FRAME_WIDTH  = 1200; // = 5/8 * 1920
+    private static final int           MAX_FRAME_HEIGHT = 675; // = 5/8 * 1080
+    private static       CameraManager mCameraManager;
 
     private final Context                    context;
     private final CameraConfigurationManager configManager;
@@ -56,14 +57,14 @@ public final class CameraManager {
     private       Rect                       framingRectInPreview;
     private       boolean                    initialized;
     private       boolean                    previewing;
-    private int requestedCameraId = OpenCameraInterface.NO_REQUESTED_CAMERA;
-    private       int             requestedFramingRectWidth;
-    private       int             requestedFramingRectHeight;
+    private       int                        requestedCameraId = OpenCameraInterface.NO_REQUESTED_CAMERA;
+    private       int                        requestedFramingRectWidth;
+    private       int                        requestedFramingRectHeight;
     /**
      * Preview frames are delivered here, which we pass on to the registered handler. Make sure to
      * clear the handler so it will only receive one message.
      */
-    private final PreviewCallback previewCallback;
+    private final PreviewCallback            previewCallback;
 
     public CameraManager(Context context) {
         this.context = context;
@@ -345,7 +346,7 @@ public final class CameraManager {
      * @param height The height of the image.
      * @return A PlanarYUVLuminanceSource instance.
      */
-    public PlanarYUVLuminanceSource buildLuminanceSource(byte[] data, int width, int height) {
+    public PlanarYUVLuminanceSourceTest buildLuminanceSource(byte[] data, int width, int height) {
         Rect rect = getFramingRectInPreview();
         if (rect == null) {
             return null;
@@ -353,7 +354,8 @@ public final class CameraManager {
         // Go ahead and assume it's YUV rather than die.
 //        return new PlanarYUVLuminanceSource(data, width, height, rect.left, rect.top,
 //                rect.width(), rect.height(), false);
-        return new PlanarYUVLuminanceSource(data, width, height, 0, 0, width, height, false);
+//        return new PlanarYUVLuminanceSource(data, width, height, 0, 0, width, height, false);
+        return new PlanarYUVLuminanceSourceTest(data, width, height, 0, 0, width, height);
     }
 
     public OpenCamera getCamera() {

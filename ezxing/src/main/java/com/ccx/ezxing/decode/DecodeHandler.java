@@ -116,7 +116,7 @@ final class DecodeHandler extends Handler {
 
     private Result getResult(byte[] data, int width, int height) {
         Result                   rawResult = null;
-        PlanarYUVLuminanceSource source    = cameraManager.buildLuminanceSource(data, width, height);
+        PlanarYUVLuminanceSourceTest source    = cameraManager.buildLuminanceSource(data, width, height);
         if (source != null) {
             BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
             try {
