@@ -25,6 +25,7 @@ import com.ccx.ezxing.conts.Conts;
 import com.ccx.ezxing.reader.MultiFormatReader;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.DecodeHintType;
+import com.google.zxing.LuminanceSource;
 import com.google.zxing.NotFoundException;
 import com.google.zxing.PlanarYUVLuminanceSource;
 import com.google.zxing.Result;
@@ -115,8 +116,8 @@ final class DecodeHandler extends Handler {
     }
 
     private Result getResult(byte[] data, int width, int height) {
-        Result                   rawResult = null;
-        PlanarYUVLuminanceSourceTest source    = cameraManager.buildLuminanceSource(data, width, height);
+        Result          rawResult = null;
+        LuminanceSource source    = cameraManager.buildLuminanceSource(data, width, height);
         if (source != null) {
             BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
             try {

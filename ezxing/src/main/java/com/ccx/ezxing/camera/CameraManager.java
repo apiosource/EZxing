@@ -27,6 +27,7 @@ import android.view.SurfaceHolder;
 import com.ccx.ezxing.camera.open.OpenCamera;
 import com.ccx.ezxing.camera.open.OpenCameraInterface;
 import com.ccx.ezxing.decode.PlanarYUVLuminanceSourceTest;
+import com.google.zxing.LuminanceSource;
 import com.google.zxing.PlanarYUVLuminanceSource;
 
 import java.io.IOException;
@@ -346,7 +347,7 @@ public final class CameraManager {
      * @param height The height of the image.
      * @return A PlanarYUVLuminanceSource instance.
      */
-    public PlanarYUVLuminanceSourceTest buildLuminanceSource(byte[] data, int width, int height) {
+    public LuminanceSource buildLuminanceSource(byte[] data, int width, int height) {
         Rect rect = getFramingRectInPreview();
         if (rect == null) {
             return null;
