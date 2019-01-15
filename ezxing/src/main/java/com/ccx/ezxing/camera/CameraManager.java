@@ -27,6 +27,8 @@ import android.view.SurfaceHolder;
 import com.ccx.ezxing.camera.open.OpenCamera;
 import com.ccx.ezxing.camera.open.OpenCameraInterface;
 import com.ccx.ezxing.decode.PlanarYUVLuminanceSourceTest;
+import com.ccx.ezxing.decode.PlanarYUVLuminanceSourceTest2;
+import com.ccx.ezxing.decode.test.PlanarYUVLuminanceSourceTest3;
 import com.google.zxing.LuminanceSource;
 import com.google.zxing.PlanarYUVLuminanceSource;
 
@@ -356,7 +358,9 @@ public final class CameraManager {
 //        return new PlanarYUVLuminanceSource(data, width, height, rect.left, rect.top,
 //                rect.width(), rect.height(), false);
 //        return new PlanarYUVLuminanceSource(data, width, height, 0, 0, width, height, false);
-        return new PlanarYUVLuminanceSourceTest(data, width, height, 0, 0, width, height);
+//        return new PlanarYUVLuminanceSourceTest(data, width, height, 0, 0, width, height);
+        return new PlanarYUVLuminanceSourceTest2(data, width, height, 0, 0, width, height,false);
+//        return new PlanarYUVLuminanceSourceTest3(data, width, height, 0, 0, width, height, false);
     }
 
     public OpenCamera getCamera() {
