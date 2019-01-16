@@ -359,8 +359,8 @@ public final class CameraManager {
 //                rect.width(), rect.height(), false);
 //        return new PlanarYUVLuminanceSource(data, width, height, 0, 0, width, height, false);
 //        return new PlanarYUVLuminanceSourceTest(data, width, height, 0, 0, width, height);
-        return new PlanarYUVLuminanceSourceTest2(data, width, height, 0, 0, width, height,false);
-//        return new PlanarYUVLuminanceSourceTest3(data, width, height, 0, 0, width, height, false);
+//        return new PlanarYUVLuminanceSourceTest2(data, width, height, 0, 0, width, height,false);
+        return new PlanarYUVLuminanceSourceTest3(data, width, height, 0, 0, width, height);
     }
 
     public OpenCamera getCamera() {
